@@ -1,0 +1,21 @@
+<!-- app/views/profiles/show.html.erb -->
+<h1><%= @user.email %>'s Profile</h1>
+<%= image_tag @user.profile_picture_url, alt: "Profile Picture" %>
+<h2>Posts</h2>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.content, post %>
+      <p>Author: <%= post.user.email %></p>
+      <p>Likes: <%= post.likes.count %></p>
+      <ul>
+        <% post.comments.each do |comment| %>
+          <li>
+            <p><%= comment.content %></p>
+            <p>Author: <%= comment.user.email %></p>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>

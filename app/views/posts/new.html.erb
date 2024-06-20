@@ -1,0 +1,39 @@
+<!-- app/views/posts/new.html.erb -->
+<h1>New Post</h1>
+<%= form_with(model: @post, local: true) do |form| %>
+  <div>
+    <%= form.fields_for :content do |content_form| %>
+      <div>
+        <%= content_form.label :body, "Text Post" %>
+        <%= content_form.text_area :body %>
+      </div>
+      <div>
+        <%= content_form.label :image, "Photo Post" %>
+        <%= content_form.file_field :image %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<!-- app/views/posts/edit.html.erb -->
+<h1>Edit Post</h1>
+<%= form_with(model: @post, local: true) do |form| %>
+  <div>
+    <%= form.fields_for :content do |content_form| %>
+      <div>
+        <%= content_form.label :body, "Text Post" %>
+        <%= content_form.text_area :body %>
+      </div>
+      <div>
+        <%= content_form.label :image, "Photo Post" %>
+        <%= content_form.file_field :image %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<!-- app/views/posts/show.html.erb -->
+<h1><%= @post.content.body %></h1>
+<% if @post.content.image.attached? %>
+  <%= image_tag @post.content.image %>
+<% end %>
+<p>Author: <%= @post.user.email %></p>
+<p>Likes: <%= @post.likes.count %></p>
+<% if @post.likes.find_by(user: current_user) %>
+  <%= button_to 'Unlike', unlike_post_path(@post), method: :delete %>
+<% else %>
+  <%= button_to 'Like', like_post_path(@post) %>
+<% end %>
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+
+<h2>Comments</h2>
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li>
+      <p><%= comment.content %></p>
+      <p>Author: <%= comment.user.email %></p>
+    </li>
+  <% end %>
+</ul>
+
+<h2>New Comment</h2>
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
